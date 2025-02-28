@@ -29,11 +29,17 @@ rem This seems lame.
 for /f "delims=" %%a in ('hostname') do @set myhostname=%%a
 echo     Hostname:                             %myhostname%
 
-for /f "delims=" %%a in ('netsh interface ip show address "Local Area Connection" ^| findstr/c:"IP Address"') do @set myaddr=%%a
+for /f "delims=" %%a in ('netsh interface ip show address "Ethernet 1" ^| findstr/c:"IP Address"') do @set myaddr=%%a
 echo %myaddr%
 
-for /f "delims=" %%a in ('netsh interface ip show address "Local Area Connection" ^| findstr/c:"Default Gateway"') do @set mygateway=%%a
+for /f "delims=" %%a in ('netsh interface ip show address "Ethernet 1" ^| findstr/c:"Default Gateway"') do @set mygateway=%%a
 echo %mygateway%
+
+for /f "delims=" %%a in ('netsh interface ip show config "Ethernet 1" ^| findstr/c:"DNS servers"') do @set dns=%%a
+echo %dns%
+
+for /f "delims=" %%a in ('netsh interface ip show config "Ethernet 1" ^| findstr/c:"                                          "') do @set dns=%%a
+echo %dns%
 
 rem This is a little lame.
 rem for /f "delims=" %%a in ('wmic OS Get LastBootUpTime ^| findstr/c:"."' ) do @set myboottime=%%a
