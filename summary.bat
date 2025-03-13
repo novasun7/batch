@@ -7,7 +7,7 @@ if NOT [%1] == [] (
   set START_DIR=%~1
 ) else (
   rem set START_DIR=%USERPROFILE%\Music\iTunes\iTunes Media
-  set START_DIR=D:\Music\iTunes\iTunes Media\
+  set START_DIR=D:\Users\Paul\OneDrive\Music\iTunes\iTunes Media\
 )
 
 
@@ -57,10 +57,10 @@ del total.out
 
 rem Total AAC music files
 set /a AACTOTAL = M4ATOTAL + M4PTOTAL 
-set MyStr="Total AAC music files:"
-echo -----------------------------------------
-call :PrintIt %MyStr% %AACTOTAL%
-echo -----------------------------------------
+rem set MyStr="Total AAC music files:"
+rem echo -----------------------------------------
+rem call :PrintIt %MyStr% %AACTOTAL%
+rem echo -----------------------------------------
 
 rem mp3 music files
 dir /s /b /a-d "%START_DIR%\Music\*.mp3" 2>nul | find "" /v /n /c > total.out
@@ -73,18 +73,19 @@ del total.out
 rem echo Summary of music in %START_DIR%\Apple Music
 
 rem Apple Music files
-dir /s /b /a-d "%START_DIR%\Apple Music\*.m4p" 2>nul | find "" /v /n /c > total.out
-set /p AMTOTAL= <total.out
+rem dir /s /b /a-d "%START_DIR%\Apple Music\*.m4p" 2>nul | find "" /v /n /c > total.out
+rem set /p AMTOTAL= <total.out
 rem set /a CALCTOTAL = CALCTOTAL + M4PTOTAL
-set MyStr="Apple Music files:"
-call :PrintIt %MyStr% %AMTOTAL%
-del total.out
+rem set MyStr="Apple Music files:"
+rem call :PrintIt %MyStr% %AMTOTAL%
+rem del total.out
+rem set /a AMTOTAL = 0 
 
 set MyStr="Total music files:"
 set /a MUSICTOTAL = M4ATOTAL + M4PTOTAL + MP3TOTAL + AMTOTAL
-echo -----------------------------------------
+rem echo -----------------------------------------
 call :PrintIt %MyStr% %MUSICTOTAL%
-echo -----------------------------------------
+rem echo -----------------------------------------
 
 
 
