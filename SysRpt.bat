@@ -19,6 +19,11 @@ rem Remove leading and trailing space, yes this is complicated.
 for /f "tokens=* delims= " %%a in ("%rpttime%") do set rpttime=%%a
 for /l %%a in (1,1,100) do if "!rpttime:~-1!"==" " set rpttime=!rpttime:~0,-1!
 
+rem Install time
+systeminfo | find "Original Install Date" > out
+set /p inst_date= < out
+del out
+
 rem Show header
 echo.
 set header=Report generated
@@ -78,5 +83,9 @@ for %%a in (%myuptime%) do (
 )
 
 echo     Uptime:                               %days% day(s), %hours% hour(s), %mins% minute(s), %secs% second(s)
+
+rem Install time
+echo     Original Install Date:                %inst_date:~31%
+
 
 
